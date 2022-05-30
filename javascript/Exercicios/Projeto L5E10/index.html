@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <label for="idValorLabel">valor </label><br>
+        <input type="number" id="idValorLabel">
+        <br><br>
+        <p>Converter </p>
+        
+        <input type="radio" name="nmDe" id="idReal1">
+        <label for="idReal1">Reais</label><br>
+
+        <input type="radio" name="nmDe" id="idDolarAmericano1">
+        <label for="idDolarAmericano1">Dólar Americano</label><br>
+
+        <input type="radio" name="nmDe" id="idEuro1">
+        <label for="idEuro1">Euro</label><br>
+
+        <input type="radio" name="nmDe" id="idLibraEsterlina1">
+        <label for="idLibraEsterlina1">Libra Esterlina</label><br>
+
+        <input type="radio" name="nmDe" id="idDolarCanadense1">
+        <label for="idDolarCanadense1">Dólar Canadense</label>
+        
+        <P>para</P>
+        
+        <input type="radio" name="nmPara" id="idReal2">
+        <label for="idReal2">Reais</label><br>
+
+        <input type="radio" name="nmPara" id="idDolarAmericano2">
+        <label for="idDolarAmericano2">Dólar Americano</label><br>
+
+        <input type="radio" name="nmPara" id="idEuro2">
+        <label for="idEuro2">Euro</label><br>
+
+        <input type="radio" name="nmPara" id="idLibraEsterlina2">
+        <label for="idLibraEsterlina2">Libra Esterlina</label><br>
+
+        <input type="radio" name="nmPara" id="idDolarCanadense2">
+        <label for="idDolarCanadense2">Dólar Canadense</label>
+
+        <br><br>
+
+
+        <input type="button" value="Converter" onclick="converter()" >
+        <br><br>
+        <input type="number" name="nmResposta" id="idResposta">
+    </form>
+    <script>
+        function converter() {
+            let valorLabel = Number(document.getElementById("idValorLabel").value)
+
+            let real1 = document.getElementById("idReal1").checked
+            let real2 = document.getElementById("idReal2").checked
+
+            let dolarAmericano1 = document.getElementById("idDolarAmericano1").checked
+            let dolarAmericano2 = document.getElementById("idDolarAmericano2").checked
+
+            let euro1 = document.getElementById("idEuro1").checked
+            let euro2 = document.getElementById("idEuro2").checked
+
+            let libraEsterlina1 = document.getElementById("idLibraEsterlina1").checked
+            let libraEsterlina2 = document.getElementById("idLibraEsterlina2").checked
+
+            let dolarCanadense1 = document.getElementById("idDolarCanadense1").checked
+            let dolarCanadense2 = document.getElementById("idDolarCanadense2").checked
+
+            let out = document.getElementById("idOut")
+
+            let valorFinal
+
+            if (real1 == true && dolarAmericano2 == true ) {
+
+                valorFinal = valorLabel * 0.21
+                
+            } else if (real1 == true && euro2 == true ) {
+
+                valorFinal = valorLabel * 0.19
+                
+            } else if (real1 == true && libraEsterlina2 == true ) {
+                
+                valorFinal = valorLabel * 0.17
+
+            } else if (real1 == true && dolarCanadense2 == true ) {
+
+                valorFinal = valorLabel * 0.27
+                
+            }
+            
+
+
+            if (dolarAmericano1 == true && real2 == true ) {
+
+                valorFinal = valorLabel * 4.81
+                
+            } else if (dolarAmericano1 == true && dolarCanadense2 == true ) {
+
+                valorFinal = valorLabel * 1.28
+                
+            } else if (dolarAmericano1 == true && libraEsterlina2 == true ) {
+                
+                valorFinal = valorLabel * 0.79
+
+            } else if (dolarAmericano1 == true && euro2 == true ) {
+
+                valorFinal = valorLabel * 0.94
+                
+            }
+
+
+
+
+            if (dolarCanadense1 == true && real2 == true ) {
+
+                valorFinal = valorLabel * 3.77
+                
+            } else if (dolarCanadense1 == true && dolarAmericano2 == true ) {
+
+                valorFinal = valorLabel * 0.78
+                
+            } else if (dolarCanadense1 == true && libraEsterlina2 == true ) {
+                
+                valorFinal = valorLabel * 0.62
+
+            } else if (dolarCanadense1 == true && euro2 == true ) {
+
+                valorFinal = valorLabel * 0.73
+                
+            }
+
+
+
+            if (libraEsterlina1 == true && real2 == true ) {
+
+                valorFinal = valorLabel * 6.05
+                
+            } else if (libraEsterlina1 == true && dolarAmericano2 == true ) {
+
+                valorFinal = valorLabel * 1.26
+                
+            } else if (libraEsterlina1 == true && dolarCanadense2 == true ) {
+                
+                valorFinal = valorLabel * 1.61
+
+            } else if (libraEsterlina1 == true && euro2 == true ) {
+
+                valorFinal = valorLabel * 1.18
+                
+            }
+
+
+
+            if (euro1 == true && real2 == true ) {
+
+                valorFinal = valorLabel * 5.14
+                
+            } else if (euro1 == true && dolarAmericano2 == true ) {
+
+                valorFinal = valorLabel * 1.07
+                
+            } else if (euro1 == true && dolarCanadense2 == true ) {
+                
+                valorFinal = valorLabel * 1.37
+
+            } else if (euro1 == true && libraEsterlina2 == true ) {
+
+                valorFinal = valorLabel * 0.85
+                
+            }
+
+            if (real1 == true && real2 == true) {
+                tempFinal = ""
+                window.alert("Não da para converter para a mesma unidade")
+        
+            }
+             if (dolarAmericano1 == true && dolarAmericano2 == true) {
+                tempFinal = ""
+                window.alert("Não da para converter para a mesma unidade")
+        
+            }
+            if (dolarCanadense1 == true && dolarCanadense2 == true) {
+                tempFinal = ""
+                window.alert("Não da para converter para a mesma unidade")
+        
+            }
+            if (libraEsterlina1 == true && libraEsterlina2 == true) {
+                tempFinal = ""
+                window.alert("Não da para converter para a mesma unidade")
+        
+            }
+            if (euro1 == true && euro2 == true) {
+                tempFinal = ""
+                window.alert("Não da para converter para a mesma unidade")
+        
+            }
+
+            out.value = valorFinal 
+        }
+    
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <p>Elabore um algoritmo para Entrar com um número e imprimir uma das mensagens: 
+            maior do que 20, igual a 20 ou menor do que 20.</p>
+        <label for="idNum">Numero:</label><br>
+        <input type="number" id="idNum" name="nmNum">
+        <br><br>
+        <output id="idOut"></output>
+        <br><br>
+        <input type="button" value="Testar numero!" onclick="testarnumero()">
+    </form>
+    <script>
+        function testarnumero() {
+            var Num = Number(document.getElementById("idNum").value)
+
+            if (Num > 20) {
+                document.getElementById("idOut").value = "Numero " + Num + " é maior que vinte!"
+            }
+            if (Num < 20) {
+                document.getElementById("idOut").value = "Numero " + Num + " é menor que vinte!"
+            }
+            if (Num == 20) {
+                document.getElementById("idOut").value = "Numero " + Num + " é igual a vinte!"
+            }
+
+        }
+
+
+    </script>
+    
+</body>
+</html>

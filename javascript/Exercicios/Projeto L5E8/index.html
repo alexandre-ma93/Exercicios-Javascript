@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <label for="idTempC">Temperatura em °C</label><br>
+        <input type="number" name="nmTempC" id="idTempC">
+        <br><br>
+        <input type="button" value="Converter para Fahrenheit" onclick="converterparaF()">
+        <br><br>
+        <output id="idOut"></output>
+    </form>
+    <script>
+        
+    
+        function converterparaF() {
+            
+            let tempC = Number(document.getElementById("idTempC").value)
+            let tempF = tempC * 9 / 5 + 32
+
+            document.getElementById("idOut").value = "A temperatura em Fahrenheit é " + tempF
+        }
+        
+        
+    </script>
+</body>
+</html>
