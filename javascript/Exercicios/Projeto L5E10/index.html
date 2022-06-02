@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 10 - Lista 5</title>
+</head>
+<body>
+    <p>Cotação das Moedas hoje:</p><br>
+ 
+
+
+
+    <p>Indique valor a ser convertido abaixo e selecione a moeda:</p>
+    <label for="idValor"></label>
+    <input type="number" name="=nmValor" id="idValor" step="0.01">
+    <select name="nmMoeda" id="idMoeda">
+        <option value="Real" id="idReal" selected> Real</option>
+        <option value="DolarAmericano" id="idDolarAmericano"> Dolar Americano</option>
+        <option value="Euro" id="idEuro"> Euro</option>
+        <option value="LibraEsterlina" id="idLibraEsterlina"> Libra Esterlina</option>
+        <option value="DolarCanadense" id="idDolarCanadense"> Dolar Canadense</option>
+    </select>
+    <br><br>
+    <p>Agora selecione para que moeda você quer converter o valor acima:</p>
+    <select name="nmMoedaConverter" id="idMoedaConverter">
+        <option value="RealC" id="idRealC" selected> Real</option>
+        <option value="DolarAmericanoC" id="idDolarAmericanoC"> Dolar Americano</option>
+        <option value="EuroC" id="idEuroC"> Euro</option>
+        <option value="LibraEsterlinaC" id="idLibraEsterlinaC"> Libra Esterlina</option>
+        <option value="DolarCanadenseC" id="idDolarCanadenseC"> Dolar Canadense</option>
+    </select>
+    <br><br>   
+    <input type="button" value="Converter" onclick="fazerConversao()" >
+    <br><br>
+    <output id="idOut"></output>
+
+    <script>
+        function fazerConversao(){
+            let Valor = Number(document.getElementById("idValor").value)
+            var Moeda = document.getElementById("idMoeda").value
+            var Real = document.getElementById("idReal").value
+            var DolarAmericano = document.getElementById("idDolarAmericano").value
+            var Euro = document.getElementById("idEuro").value
+            var LibraEsterlina = document.getElementById("idLibraEsterlina").value
+            var DolarCanadense = document.getElementById("idDolarCanadense").value
+            var MoedaConverter = document.getElementById("idMoedaConverter").value
+            var RealC = document.getElementById("idRealC").value
+            var DolarAmericanoC = document.getElementById("idDolarAmericanoC").value
+            var EuroC = document.getElementById("idEuroC").value
+            var LibraEsterlinaC = document.getElementById("idLibraEsterlinaC").value
+            var DolarCanadenseC = document.getElementById("idDolarCanadenseC").value
+            let out = document.getElementById("idOut")
+            let MoedaConvertida
+
+
+                if (Moeda == Real| MoedaConverter == DolarAmericanoC){
+                    MoedaConvertida = Valor
+                } else if (Medida == Fahrenheit){
+                    TempConv1 = "Em Celcius a temperatura é:  " + ((Temp - 32 ) * 5 / 9).toFixed(2)
+                    TempConv2 = "Em Kelvin a temperatura é:  " + ((Temp - 32) * 5 / 9 + 273.15).toFixed(2)
+                } else if (Medida == Kelvin){
+                    TempConv1 = "Em Celcius a temperatura é:  " + (Temp - 273.15).toFixed(2)
+                    TempConv2 = "Em Fahrenheit a temperatura é:  " + ((Temp - 273.15) * 9/5 + 32).toFixed(2)
+                }
+            
+            out.value = MoedaConvertida
+
+
+
+
+
+
+
+
+        }
+
+
+    </script>
+
+
+
+</body>
+</html>

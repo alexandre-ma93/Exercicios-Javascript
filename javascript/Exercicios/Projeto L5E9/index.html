@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 9 - Lista 5</title>
+</head>
+<body>
+    <form action="">
+        <p>Informe a temperatura e a selecione a unidade de medida:</p>
+        
+        <label for="idTemp"></label>
+        <input type="number" name="nmTemp" id="idTemp">
+        
+        <select name="nmMedidas" id="idMedidas">
+        <option value="Celcius" id="idCelcius" selected> Celcius</option>
+        <option value="Fahrenheit" id="idFahrenheit"> Fahrenheit</option>
+        <option value="Kelvin" id="idKelvin"> Kelvin</option>
+        </select>
+        <br><br>   
+        <input type="button" value="Converter" onclick="fazerConversao()" >
+        <br><br>
+        <output id="idOut1"></output>
+        <br> 
+        <output id="idOut2"></output>
+    </form>
+
+    <script>    
+        function fazerConversao() {
+            let Temp = Number(document.getElementById("idTemp").value)
+            var Medida = document.getElementById("idMedidas").value
+            var Celcius = document.getElementById("idCelcius").value
+            var Fahrenheit = document.getElementById("idFahrenheit").value
+            var Kelvin = document.getElementById("idKelvin").value
+            let TempConv1
+            let TempConv2
+            let out1 = document.getElementById("idOut1")
+            let out2 = document.getElementById("idOut2")
+
+                if (Medida == Celcius){
+                    TempConv1 = "Em Fahrenheit a temperatura é:  " + ((9 * Temp + 160) / 5).toFixed(2)
+                    TempConv2 = "Em Kelvin a temperatura é:  " + (Temp + 273.15).toFixed(2)
+                } else if (Medida == Fahrenheit){
+                    TempConv1 = "Em Celcius a temperatura é:  " + ((Temp - 32 ) * 5 / 9).toFixed(2)
+                    TempConv2 = "Em Kelvin a temperatura é:  " + ((Temp - 32) * 5 / 9 + 273.15).toFixed(2)
+                } else if (Medida == Kelvin){
+                    TempConv1 = "Em Celcius a temperatura é:  " + (Temp - 273.15).toFixed(2)
+                    TempConv2 = "Em Fahrenheit a temperatura é:  " + ((Temp - 273.15) * 9/5 + 32).toFixed(2)
+                }
+            
+            out1.value = TempConv1
+            out2.value = TempConv2
+        
+        }
+
+    </script>
+</body>
+</html>
