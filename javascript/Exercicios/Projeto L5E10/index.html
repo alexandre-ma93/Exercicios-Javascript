@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 10 - Lista 5</title>
+    <style>
+        /* Formatação css dos elementos: h1, h2, form e img. */
+        h1{
+            text-align: center;
+            color: green;
+        }
+        h2{
+            text-align: center;
+            color: green;
+        }
+        form{
+            text-align: center;
+            padding: 10px;
+            border: 2px;
+            border-style: solid;
+        }
+        img{
+            float: center;
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <form>  
+        <!-- Apresenta da cotação do dia das moedas: dolar americano, euro, libra esterlina e dolar canadense. -->
+        <figure>
+        <img src="moeda.png" alt="ImagemMoeda">
+        </figure>
+        <h1>Cotação das Moedas hoje:</h1>
+        <label for="idMoedaDolarAmericano">Dolar Americano</label>
+        <input type="number" name="nmMoedaDolarAmericano" id="idMoedaDolarAmericano" value="4.90" disabled>
+        <label for="idMoedaEuro">Euro</label>
+        <input type="number" name="nmMoedaEuro" id="idMoedaEuro" value="5.25" disabled>
+        <label for="idMoedaLibraEsterlina">Libra Esterlina</label>
+        <input type="number" name="nmMoedaLibraEsterlina" id="idMoedaLibraEsterlina" value="6.14" disabled>
+        <label for="idMoedaDolarCanadense">Dolar Canadense</label>
+        <input type="number" name="nmMoedaDolarCanadense" id="idMoedaDolarCanadense" value="3.90" disabled>
+        <br><br><br>
+    </form>
+    <br>
+
+    <!-- Campo para colocar o valor, a moeda e escolher para qual moeda vai ser convertida o valor. -->
+    <form action="="> 
+        <h2>Informe o valor e a moeda que você quer que seja convertida:</h2>
+        <!-- Valor da moeda a ser convertida -->
+        <label for="idValor"></label>
+        <input type="number" name="=nmValor" id="idValor" step="0.01">
+        <!-- Escolha de moeda de entrada -->
+        <select name="nmMoeda" id="idMoeda">
+            <option value="Real" id="idReal" selected> Real</option>
+            <option value="DolarAmericano" id="idDolarAmericano"> Dolar Americano</option>
+            <option value="Euro" id="idEuro"> Euro</option>
+            <option value="LibraEsterlina" id="idLibraEsterlina"> Libra Esterlina</option>
+            <option value="DolarCanadense" id="idDolarCanadense"> Dolar Canadense</option>
+        </select>
+        Converter para:
+        <!-- Escolha de moeda de saida -->
+        <select name="nmMoedaConverter" id="idMoedaConverter">
+            <option value="RealC" id="idRealC" selected> Real</option>
+            <option value="DolarAmericanoC" id="idDolarAmericanoC"> Dolar Americano</option>
+            <option value="EuroC" id="idEuroC"> Euro</option>
+            <option value="LibraEsterlinaC" id="idLibraEsterlinaC"> Libra Esterlina</option>
+            <option value="DolarCanadenseC" id="idDolarCanadenseC"> Dolar Canadense</option>
+        </select>
+        <br><br>   
+        <!-- Botão para aplicar a função de converter e limpar campos -->
+        <input type="button" value="Converter" onclick="fazerConversao()">
+        <input type="reset" value="Limpar" id="idReset">
+        <br><br>
+        <!-- Resultado da conversão -->
+        <output id="idOut"></output>
+    </form>
+
+    <script>
+        // funcao de conversão da moeda
+        function fazerConversao(){
+            // variaveis coletadas da cotação de moedas
+            let ValorMoedaDolarAmericano = Number(document.getElementById("idMoedaDolarAmericano").value)
+            let ValorMoedaEuro = Number(document.getElementById("idMoedaEuro").value)
+            let ValorMoedaLibraEsterlina = Number(document.getElementById("idMoedaLibraEsterlina").value)
+            let ValorMoedaDolarCanadense = Number(document.getElementById("idMoedaDolarCanadense").value)
+
+            // variaveis coletadas em moeda de entrada
+            var Real = document.getElementById("idReal").value
+            var DolarAmericano = document.getElementById("idDolarAmericano").value
+            var Euro = document.getElementById("idEuro").value
+            var LibraEsterlina = document.getElementById("idLibraEsterlina").value
+            var DolarCanadense = document.getElementById("idDolarCanadense").value
+
+            // variaveis coletadas em moeda de saida
+            var RealC = document.getElementById("idRealC").value
+            var DolarAmericanoC = document.getElementById("idDolarAmericanoC").value
+            var EuroC = document.getElementById("idEuroC").value
+            var LibraEsterlinaC = document.getElementById("idLibraEsterlinaC").value
+            var DolarCanadenseC = document.getElementById("idDolarCanadenseC").value
+
+            // variveis coletas em valor de moeda a ser convertida, campo para escolher moeda de entrada, campo para escolher moeda para converter e campo de resultado
+            let Valor = Number(document.getElementById("idValor").value)
+            var Moeda = document.getElementById("idMoeda").value
+            var MoedaConverter = document.getElementById("idMoedaConverter").value
+            let out = document.getElementById("idOut")
+            let MoedaConvertida
+
+                // conversão a partir da moeda de entrada Real
+                if (Moeda == Real && MoedaConverter == RealC){
+                    MoedaConvertida = (Valor).toFixed(2)
+                } else if (Moeda == Real && MoedaConverter == DolarAmericanoC){
+                    MoedaConvertida = (Valor * ValorMoedaDolarAmericano).toFixed(2)
+                } else if (Moeda == Real && MoedaConverter == EuroC){
+                    MoedaConvertida = (Valor * ValorMoedaEuro).toFixed(2)
+                } else if (Moeda == Real && MoedaConverter == LibraEsterlinaC){
+                    MoedaConvertida = (Valor * ValorMoedaLibraEsterlina).toFixed(2)
+                } else if (Moeda == Real && MoedaConverter == DolarCanadenseC){
+                    MoedaConvertida = (Valor * ValorMoedaDolarCanadense).toFixed(2)
+                } 
+                
+                // conversão a partir da moeda de entrada Dolar Americano
+                if (Moeda == DolarAmericano && MoedaConverter == DolarAmericanoC){
+                    MoedaConvertida = (Valor).toFixed(2)
+                }else if (Moeda == DolarAmericano && MoedaConverter == RealC){
+                    MoedaConvertida = (Valor / ValorMoedaDolarAmericano).toFixed(2)
+                } else if (Moeda == DolarAmericano && MoedaConverter == EuroC){
+                    MoedaConvertida = (Valor * 0.93).toFixed(2)
+                } else if (Moeda == DolarAmericano && MoedaConverter == LibraEsterlinaC){
+                    MoedaConvertida = (Valor * 0.80).toFixed(2)
+                } else if (Moeda == DolarAmericano && MoedaConverter == DolarCanadenseC){
+                    MoedaConvertida = (Valor * 1.26).toFixed(2)
+                } 
+                
+                // conversão a partir da moeda de entrada Euro
+                if (Moeda == Euro && MoedaConverter == EuroC){
+                    MoedaConvertida = (Valor).toFixed(2)
+                } else if (Moeda == Euro && MoedaConverter == DolarAmericanoC){
+                    MoedaConvertida = (Valor * 1.07).toFixed(2)
+                } else if (Moeda == Euro && MoedaConverter == LibraEsterlinaC){
+                    MoedaConvertida = (Valor * 0.85).toFixed(2)
+                } else if (Moeda == Euro && MoedaConverter == RealC){
+                    MoedaConvertida = (Valor * 5.25).toFixed(2)
+                } else if (Moeda == Euro && MoedaConverter == DolarCanadenseC){
+                    MoedaConvertida = (Valor * 1.35).toFixed(2)
+                } 
+                
+                
+                // conversão a partir da moeda de entrada Libra Esterlina
+                if (Moeda == LibraEsterlina && MoedaConverter == LibraEsterlinaC){
+                    MoedaConvertida = (Valor).toFixed(2)
+                } else if (Moeda == LibraEsterlina && MoedaConverter == DolarAmericanoC){
+                    MoedaConvertida = (Valor * 1.25).toFixed(2)
+                } else if (Moeda == LibraEsterlina && MoedaConverter == EuroC){
+                    MoedaConvertida = (Valor * 1.17).toFixed(2)
+                } else if (Moeda == LibraEsterlina && MoedaConverter == RealC){
+                    MoedaConvertida = (Valor * 6.14).toFixed(2)
+                } else if (Moeda == LibraEsterlina && MoedaConverter == DolarCanadenseC){
+                    MoedaConvertida = (Valor * 1.57).toFixed(2)
+                }
+                
+                // conversão a partir da moeda de entrada Dolar Canadense
+                if (Moeda == DolarCanadense && MoedaConverter == DolarCanadenseC{
+                    MoedaConvertida = (Valor).toFixed(2)
+                } else if (Moeda == DolarCanadense && MoedaConverter == DolarAmericanoC){
+                    MoedaConvertida = (Valor * 0.80).toFixed(2)
+                } else if (Moeda == DolarCanadense && MoedaConverter == EuroC){
+                    MoedaConvertida = (Valor * 0.74).toFixed(2)
+                } else if (Moeda == DolarCanadense && MoedaConverter == LibraEsterlinaC){
+                    MoedaConvertida = (Valor * 0.64).toFixed(2)
+                } else if (Moeda == DolarCanadense && MoedaConverter == RealC){
+                    MoedaConvertida = (Valor * 3.90).toFixed(2)
+                }
+
+            // saida do resultado de conversão
+            out.value = "O valor convertido corresponde a:  " + MoedaConvertida
+        }
+    </script>
+
+</body>
+</html>
