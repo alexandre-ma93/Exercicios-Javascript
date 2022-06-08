@@ -8,17 +8,21 @@
 </head>
 <body>
     <form action="">
+
+        <!-- Programa criado para fazer conversöes de medidas de temperatura-->
+
         <p>Informe a temperatura e a selecione a unidade de medida:</p>
-        
+
+        <!-- Campos para colocar temperatura e medida-->
         <label for="idTemp"></label>
         <input type="number" name="nmTemp" id="idTemp">
-        
         <select name="nmMedidas" id="idMedidas">
         <option value="Celcius" id="idCelcius" selected> Celcius</option>
         <option value="Fahrenheit" id="idFahrenheit"> Fahrenheit</option>
         <option value="Kelvin" id="idKelvin"> Kelvin</option>
         </select>
         <br><br>   
+        <!-- Botäo para executar função de conversäo e campo de resutado -->
         <input type="button" value="Converter" onclick="fazerConversao()" >
         <br><br>
         <output id="idOut1"></output>
@@ -26,8 +30,10 @@
         <output id="idOut2"></output>
     </form>
 
-    <script>    
+    <script> 
+        //- Função para converter temperaturas   
         function fazerConversao() {
+            //- Apresentacao das variaveis da função
             let Temp = Number(document.getElementById("idTemp").value)
             var Medida = document.getElementById("idMedidas").value
             var Celcius = document.getElementById("idCelcius").value
@@ -38,17 +44,22 @@
             let out1 = document.getElementById("idOut1")
             let out2 = document.getElementById("idOut2")
 
+                //- Fórmula de conversäo para fahrenheit e kelvin caso a medida para conversäo seja celcius
                 if (Medida == Celcius){
                     TempConv1 = "Em Fahrenheit a temperatura é:  " + ((9 * Temp + 160) / 5).toFixed(2)
                     TempConv2 = "Em Kelvin a temperatura é:  " + (Temp + 273.15).toFixed(2)
-                } else if (Medida == Fahrenheit){
+                } 
+                //- Fórmula de conversäo para celcius e kelvin caso a medida para conversäo seja fahrenheit
+                else if (Medida == Fahrenheit){
                     TempConv1 = "Em Celcius a temperatura é:  " + ((Temp - 32 ) * 5 / 9).toFixed(2)
                     TempConv2 = "Em Kelvin a temperatura é:  " + ((Temp - 32) * 5 / 9 + 273.15).toFixed(2)
-                } else if (Medida == Kelvin){
+                } 
+                //- Fórmula de conversäo para celcius e fahrenheit caso a medida para conversäo seja kelvin
+                else if (Medida == Kelvin){
                     TempConv1 = "Em Celcius a temperatura é:  " + (Temp - 273.15).toFixed(2)
                     TempConv2 = "Em Fahrenheit a temperatura é:  " + ((Temp - 273.15) * 9/5 + 32).toFixed(2)
                 }
-            
+            //- Resultados das formulas acima
             out1.value = TempConv1
             out2.value = TempConv2
         
