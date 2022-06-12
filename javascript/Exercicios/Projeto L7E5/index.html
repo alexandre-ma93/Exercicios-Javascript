@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 5 - Lista 7</title>
+    <style>
+        /* formatação em css dos elementos p, form, label e output */
+        p {
+            color: rgba(246, 98, 0, 0.963);
+            text-align: center;
+            font-size: 39px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            color: rgba(246, 98, 0, 0.963);
+            text-align: center;
+            font-size: 20px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        output {
+            color: rgba(246, 98, 0, 0.963);
+            text-align: center;
+            font-size: 20px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Programa para ler 10 números e permitir ao usuário que escolha entre: ordenar em ordem crescente ou decrescente -->
+    <p>Lista de numeros:</p>
+    <form action="">
+        <!-- campo para colocar numero -->
+        <label for="idNum">Digite o numero:</label>
+        <input type="number" name="nmNum" id="idNum">
+
+        <!-- botão com função para salvar numeros no array numero-->
+        <input type="button" value="Salvar Numero" id="idBotaoSalvar" onclick="SalvarNumero()">
+        <br>
+        <h4>Obs.: o programa só funciona com 10 numeros salvos.</h4><br>
+
+        <!-- campo select para que o usuario escolha que forma ele quer que os numeros sejam retratados-->
+        <label for="idEscolhaUsuario"> Escolha que forma você deseja ver os numeros:</label>
+        <select name="nmEscolhaUsuario" id="idEscolhaUsuario">
+            <option value="Selecione" selected disabled hidden>Selecione uma opção</option>
+            <option value="OrdemCrescente" id="idOrdemCrescente">Ordem Crescente</option>
+            <option value="OrdemDecrescente" id="idOrdemDecrescente">Ordem Decrescente</option>
+        </select>
+
+        <!-- botão com função para resultados-->
+        <input type="button" value="Mostrar resultado" onclick="MostrarResultado()">
+        <br><br><br>
+
+        <!-- Dados do array numeros mostrados como o usuario escolheu (ordem crescente ou decrescente)-->
+        <output id="idOut"></output>
+    </form>
+    <script>
+        // variaveis das arrays de numero e limite de numeros salvos no array
+        var numeros = []
+        var limiteNumeros = 0
+
+        // função para salvar numeros no array e limitar a 10 numeros salvos 
+        function SalvarNumero() {
+            limiteNumeros++
+
+            numeros.push(Number(document.getElementById("idNum").value))
+
+            if (limiteNumeros == 10) {
+                // desabilita o campo para colocar numnero e o botao salvar depois que o limite de numeros é alcançado
+                document.getElementById("idNum").disabled = true
+                document.getElementById("idBotaoSalvar").disabled = true
+            }
+
+            // limpa campo para colocar numero depois que aperta o botao salvar
+            document.getElementById("idNum").value = ""
+        }
+
+        // função para mostrar os resultados (numero em ordem crescente ou descrecente) de acordo com que o usuario escolheu no select
+        function MostrarResultado() {
+            // pega o elemento escolhido do select
+            var EscolhaUsuario = document.getElementById("idEscolhaUsuario")
+            var CrescenteOuDescrescente = EscolhaUsuario.options[EscolhaUsuario.selectedIndex].text
+            // variavel para apresentar o resultado final na tela
+            var Resultado = document.getElementById("idOut")
+
+            // se a escolha do usuario for crescente essa função coloca na ordem escolhida os numeros
+            if (CrescenteOuDescrescente == "Ordem Crescente") {
+                numeros.sort(function (a, b) 
+                { return a - b })
+                document.getElementById("idOut").innerHTML = "O resultado é:  " + numeros
+            } 
+            // se a escolha do usuario for decrescente essa função coloca na ordem escolhida os numeros
+            else if (CrescenteOuDescrescente == "Ordem Decrescente") {
+                numeros.sort(function (a, b) 
+                { return b - a })
+                document.getElementById("idOut").innerHTML = "O resultado é:  " + numeros
+            } 
+            // se o usuario não escolheu nenhuma ordem vai gerar uma janela na tela avisando o usuario para escolher
+            else {
+                alert("Selecionar Ordem!")
+            }
+        }
+
+    </script>
+</body>
+
+</html>

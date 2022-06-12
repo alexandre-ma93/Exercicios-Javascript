@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Exercicio 1 - Lista 7</title>
+        <style>
+            /* formatação em css dos elementos p, form e table */
+            p {
+                color: blueviolet;
+                text-align: center;
+                font-size: 45px;
+                font-family: 'Courier New', Courier, monospace;
+            }
+            form {
+                text-align: center;
+            }
+            table, th, td {
+                border: 1px solid blueviolet;
+                text-align: center;
+                width: 50%;
+                font-family: 'Courier New', Courier, monospace;
+                font-size: medium;
+                margin: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <!--Programa que pega 10 notas da turma e mostra os resultados na planilha abaixo clicando nos botoes-->
+        <p>Boletim de classe:</p>
+        <form action="">
+            <!-- Campo para colocar as notas e botao para colocar notas do array-->
+            <label for="idNotas">No campo abaixo coloque as notas do alunos da turma:</label><br><br>
+            <input type="number" name="nmNotas" id="idNotas" min="0" max="10" step="0.01" pattern="[0-9]+$"><br><br>
+            <input type="button" value="Salvar Nota" id="idBotaoSalvar" onclick="SalvarNotas()"><br><br>
+
+            <!-- Botões com funções para mostras a média da turma, quantos alunos estão acima da media, a maior nota da turma e a posição da maior nota -->
+            <input type="button" value="Clique aqui para saber a média da Turma" onclick="MediaTurma()">
+
+            <input type="button" value="Clique aqui para saber quantos alunos estão acima da média" onclick="AlunosAcimaDaMedia()">
+
+            <input type="button" value="Clique aqui para saber qual foi a maior nota da turma" onclick="MaiorNotaTurma()">
+
+            <input type="button" value="Clique aqui para saber em que posição a maior nota aparece" onclick="PosicaoMaiorNota()"><br><br><br>
+
+            <table>
+                <!-- Planilha com os resultados das funcoes-->
+                <tr>
+                    <!-- Mostra todas as notas da turma-->
+                    <th>Notas da turma:</th>
+                    <td><output id="idOutNotasTurma"></output></td>
+                </tr>
+                <tr>
+                    <!-- Mostra a média da turma-->
+                    <th>A Média da Turma é:</th>
+                    <td><output id="idOutMediaTurma"></output></td>
+                </tr>
+                <tr>
+                    <!-- Mostra a quantidade de alunos que está acima da média-->
+                    <th>Quantidade de alunos que estão acima da média:</th>
+                    <td><output id="idOutAlunosAcimaDaMedia"></output><br></td>
+                </tr>
+                <tr>
+                    <!--Mostra a maior nota da turma-->
+                    <th>A Maior Nota da Turma foi:</th>
+                    <td><output id="idOutMaiorNota"></output></td>
+                </tr>
+                <tr>
+                    <!--Mostra qual posição do array ficou a maior nota da turma -->
+                    <th>A Nota mais alta da turma ficou na posição:</th>
+                    <td><output id="idOutPosicaoMaiorNota"></output></td>
+                </tr>
+            </table>
+        </form>
+
+        <script>
+            // Variaveis para as funcoes abaixo
+            var notas = []
+            var AlunosAcimaMedia = 0
+            var media = 0
+            var limiteNotas = 0
+            var MaiorNota = 0
+            var PosicaoMaior = 0
+
+            // Variaveis para mostras todos os resultados
+            var OutMedia = document.getElementById("idOutMediaTurma")
+            var OutAcimaMedia = document.getElementById("idOutAlunosAcimaDaMedia")
+            var OutMaiorNota = document.getElementById("idOutMaiorNota")
+            var OutPosicaoMaiorNota = document.getElementById("idOutPosicaoMaiorNota")
+            var OutNotasTurma = document.getElementById("idOutNotasTurma")
+            
+
+            // Função para salvas as notas no array
+            function SalvarNotas(){
+                limiteNotas++
+
+                if (limitenotas == 10){
+                    document.getElementById("idNotas").disabled = true
+                    document.getElementById("idBotaoSalvar").disabled = true
+                }
+
+                notas.push(Number(document.getElementById("idNotas").value))
+                document.getElementById("idNotas").value = ""
+                console.log(notas)
+                OutNotasTurma.value = notas
+            }
+
+            // Função para calcular a média da turma
+            function MediaTurma(){
+                media = notas.reduce(function(accumulator,value){
+                return accumulator + value
+                },0);
+                media = media / notas.length
+                OutMedia.value = media
+            }
+
+            // Funçao para ver quantos alunos estao acima da média da turma
+            function AlunosAcimaDaMedia(){
+                for (var i = 0; i <= notas.length; i++){
+                    if (notas[i] >= media){
+                    AlunosAcimaMedia++
+                    }
+                console.log(AlunosAcimaMedia)  
+                }
+                OutAcimaMedia.value = AlunosAcimaMedia
+            }
+
+            // Funcao para ver qual é a maior nota
+            function MaiorNotaTurma(){
+                MaiorNota = Math.max.apply(null, notas)
+                OutMaiorNota.value = MaiorNota
+            }
+
+            // Funcao para ver que posição esta a maior nota
+            function PosicaoMaiorNota(){
+                PosicaoMaior = notas.indexOf(MaiorNota)
+                OutPosicaoMaiorNota.value = PosicaoMaior
+            }            
+        </script>
+    </body>
+</html>

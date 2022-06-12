@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 4 - Lista 7</title>
+    <style>
+        /* formatação em css dos elementos p, form e table */
+        p {
+            color: rgb(1, 86, 14);
+            text-align: center;
+            font-size: 45px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        table,
+        th,
+        td {
+            border: 3px solid rgb(1, 86, 14);
+            border-collapse: collapse;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: medium;
+            margin: auto;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <body>
+        <!-- programa para armazenar informações meteorológicas de trinta dias e selecionar um dia para mostrar se a temperatura estã acima da média de todas as temperaturas informadas-->
+        <p>Lista de datas e temperaturas:</p>
+        <form action="">
+            <!-- campo para colocar data-->
+            <label for="idData">Data:</label>
+            <input type="date" name="nmData" id="idData">
+
+            <!-- campo para colocar temperatura-->
+            <label for="idTemp">Temperatura: (ºC)</label>
+            <input type="number" name="nmTemp" id="idTemp">
+
+            <!-- botão para função de salvar dados nos arrays--->
+            <input type="button" value="Salvar dados" id="idBotaoSalvar" onclick="SalvarDados()">
+            <br>
+            <h4>Obs.: programa criado para fazer a média geral de trinta datas.</h4>
+            <br><br><br>
+
+            <!-- select criado para selecionar entre as datas do array -->
+            <label for="idDatasSelecionadas">Selecionar data para ver se temperatura está acima da média geral:</label>
+            <select name="nmDataSelec" id="idDataSelec">
+            </select><br><br>
+            <input type="button" value="Mostrar Resultado" onclick="MostrarDados()">
+            <br><br><br>
+        </form>
+        <!-- tabela para mostrar resultados-->
+        <table id="idTabelaResultados">
+            <tr>
+                <th>Data</th>
+                <th>Temperatura (ºC)</th>
+                <th>Média Geral de Temperatura</th>
+                <th>Está acima da média?</th>
+            </tr>
+        </table>
+        <script>
+            // variaveis das funcoes abaixo
+            var datas = []
+            var temperaturas = []
+            var limiteTemp = 0
+            var media = 0
+
+            // funcao para colocar dados nos arrays datas e temperaturas, criar o limite de 30 datas, criar um select gerado do array datas
+            function SalvarDados() {
+                limiteTemp++
+                // coloca dados no array datas e temperaturas
+                datas.push(document.getElementById("idData").value)
+                temperaturas.push(Number(document.getElementById("idTemp").value))
+
+                // limita o array datas para 30 e desabilita o campo data e o botao salvas quando alcança o limite
+                if (limiteTemp == 30) {
+                    document.getElementById("idData").disabled = true
+                    document.getElementById("idBotaoSalvar").disabled = true
+
+                    // criar dinamicamente select na tela com dados do array datas, mostrando como opcoes as datas para comparar com a media geral de temperatura
+                    var ArrayDataSelecionada = document.getElementById("idDataSelec")
+
+                    // looping para adicionar os options no campo de selecionar data para comparar com a media selecionada
+                    for (const val of datas) {
+                        var datasEscolhidas = document.createElement("option")
+                        datasEscolhidas.value = val
+                        datasEscolhidas.text = val.charAt(0).toUpperCase() + val.slice(1)
+                        ArrayDataSelecionada.appendChild(datasEscolhidas)
+                    }
+                }
+                // limpa o campo de colocar data e temperatura depois de clicado o botao salvar
+                document.getElementById("idData").value = ""
+                document.getElementById("idTemp").value = ""
+            }
+
+
+            // função para fazer média de temperatura e verificar se a temperatura da data selecionada está maior que a media, e criar a as linhas da tabela de resultados
+            function MostrarDados() {
+                let tabelaResultados = document.getElementById("idTabelaResultados")
+                var DataSelect = document.getElementById("idDataSelec")
+
+                // faz o calculo da média geral das temperaturas
+                media = temperaturas.reduce(function (accumulator, value) {
+                    return accumulator + value
+                }, 0);
+                media = (media / temperaturas.length).toFixed(2)
+                console.log(media)
+
+                // pega a data selecionada das opcoes que foram criadas do array datas    
+                var dataSelecionada = DataSelect.options[DataSelect.selectedIndex].value
+
+                // cria a linha da tabela de resultados
+                for (var i = 0; i <= datas.length; i++) {
+                    if (dataSelecionada == datas[i] && temperaturas[i] >= media) {
+                        // adiciona linha na tabela
+                        let tr = tabelaResultados.insertRow()
+                        // adiciona colunas na tabela
+                        let tdData = tr.insertCell()
+                        let tdTemperatura = tr.insertCell()
+                        let tdMedia = tr.insertCell()
+                        let tdAcimaMedia = tr.insertCell()
+
+                        tdData.innerText = this.datas[i]
+                        tdTemperatura.innerText = this.temperaturas[i]
+                        tdMedia.innerText = media
+                        tdAcimaMedia.innerText = "Está acima da média!"
+
+                    } else if (dataSelecionada == datas[i] && temperaturas[i] <= media) {
+                        // adiciona linha na tabela
+                        let tr = tabelaResultados.insertRow()
+                        // adiciona coluna na tabela
+                        let tdData = tr.insertCell()
+                        let tdTemperatura = tr.insertCell()
+                        let tdMedia = tr.insertCell()
+                        let tdAcimaMedia = tr.insertCell()
+
+                        tdData.innerText = this.datas[i]
+                        tdTemperatura.innerText = this.temperaturas[i]
+                        tdMedia.innerText = media
+                        tdAcimaMedia.innerText = "Não acima da média!"
+
+                    }
+
+                }
+            }
+        </script>
+    </body>
+
+</body>
+
+</html>
