@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 3 - Lista 7</title>
+</head>
+
+<body>
+    <style>
+        /* formatação em css dos elementos p, form e table */
+        p {
+            text-align: center;
+            text-shadow: 2px;
+            color: rgb(38, 0, 255);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 30px;
+        }
+
+        form {
+            text-align: center;
+            border-collapse: collapse;
+            width: 60%;
+            border: 2px solid rgb(38, 0, 255);
+            margin: auto;
+            font-size: medium;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 10px;
+        }
+
+        table,
+        th,
+        td {
+            border-collapse: collapse;
+            text-align: center;
+            border: 2px solid rgb(38, 0, 255);
+            margin: auto;
+            font-size: medium;
+            font-family: Arial, Helvetica, sans-serif;
+            padding-left: 90.5px;
+            padding-right: 90.5px;
+        }
+
+    </style>
+    </head>
+
+    <body>
+        <!-- programa para fazer relatório de empregados do sexo feminino que ganham mais de R$ 5.000,00-->
+        <form action="">
+            <p>Cadastro de funcionários:</p>
+            <!-- campo para colocar nome-->
+            <label for="idNome">Nome:</label>
+            <input type="text" name="nmNome" id="idNome">
+            <br><br>
+
+            <!-- campo para colocar sexo-->
+            <label for="idSexo">Sexo:</label>
+            <select name="nmSexo" id="idSexo">
+                <option value="Selecione" selected disabled hidden>Selecione uma opção</option>
+                <option value="Feminino" id="idFeminino">Feminino</option>
+                <option value="Masculino" id="idMasculino">Masculino</option>
+            </select>
+            <br><br>
+
+            <!-- campo para colocar salário-->
+            <label for="idSalario">Salário:</label>
+            <input type="number" name="nmSalario" id="idSalario">
+            <br><br>
+
+            <!-- botão para função de salvar dados no array e mostrar lista de empregados do sexo feminino que ganham mais de R$ 5.000,00--->
+            <input type="button" value="Salvar dados" onclick="SalvarDados()">
+            <input type="button" value="Mostrar relatório" onclick="MostrarDados()">
+            <br><br><br>
+        </form>
+        <!-- tabela para mostrar resultados-->
+        <table id="idTabelaResultados">
+            <br><br><br>
+            <tr>
+                <th>Nome</th>
+                <th>Sexo</th>
+                <th>Salário (R$)</th>
+            </tr>
+        </table>
+        <script>
+            // variaveis dos arrays nomes, sexos e salarios
+            var nomes = []
+            var sexos = []
+            var salarios = []
+
+
+            // funcao para colocar dados nos arrays nomes, sexos e salarios
+            function SalvarDados() {
+                var sexo = document.getElementById("idSexo")
+                var salario = Number(document.getElementById("idSalário"))
+                // variavel com o valor salário minimo
+                var salarioMinimo = 1212.00
+
+                // se o usuario colocar menos que três carcteres no campo nome ele gera um alerta na pagina pedindo para o usario preencher o campo
+                if (document.getElementById("idNome").value.length < 3){
+                    alert("Por favor, preencha o campo nome!")
+                    document.getElementById("idNome").focus()
+                    return false
+                } 
+                // se o usuario não selecionar nenhuma opção no campo sexo ele gera um alerta na pagina pedindo para o usario escolher
+                else if ("Selecione" == sexo.options[sexo.selectedIndex].value) {
+                    alert ("Por favor, selecionar sexo!")
+                    document.getElementById("idSexo").focus()
+                }
+                // se o usuario colocar menos que três carcteres no campo salario ele gera um alerta na pagina pedindo para o usario preencher o campo
+                else if (document.getElementById("idSalario").value.length < 3) {
+                    alert("Por favor, preencha o campo salário!")
+                    document.getElementById("idSalario").focus()
+                    return false
+                } 
+                // se o usuario colocar um valor a baixo do salario minimo gera um alerta na pagina pedindo para ser preenchido o campo de forma correta
+                else if (document.getElementById("idSalario").value < salarioMinimo) {
+                    alert('Por favor, preencha o campo salário de forma correta!');
+                    document.getElementById("idSalario").focus()
+                    return false
+                }
+                // se todos os campos foram preenchidos de forma correta, essa função coloca os valores preenchidos nos arrays nomes, sexos e salarios
+                else {
+                    nomes.push(document.getElementById("idNome").value)
+                    salarios.push(Number(document.getElementById("idSalario").value))
+                    
+                    var femininoOuMasculino = sexo.options[sexo.selectedIndex].text
+                    sexos.push(femininoOuMasculino)
+
+                // limpa os campos depois de salvo as informações nos arrays
+                    document.getElementById("idNome").value = ""
+                    document.getElementById("idSalario").value = ""
+                    sexo.selectedIndex = 0
+                }
+        
+                
+            }
+
+            // função para fazer tabela de relatório com empregados do sexo feminino que recebem salario superior a R$ 5.000
+            function MostrarDados() {
+                let tabelaResultados = document.getElementById("idTabelaResultados")
+
+                for (var i = 0; i <= sexos.length; i++) {
+                    if ("Feminino" == sexos[i] && salarios[i] >= 5000) {
+                        // adiciona linha na tabela
+                        let tr = tabelaResultados.insertRow()
+                        // adiciona coluna na tabela
+                        let tdNome = tr.insertCell()
+                        let tdSexo = tr.insertCell()
+                        let tdSalario = tr.insertCell()
+                        // coloca os valores dos arrays nas linhas e tabelas
+                        tdNome.innerText = this.nomes[i]
+                        tdSexo.innerText = this.sexos[i]
+                        tdSalario.innerText = (this.salarios[i]).toFixed(2)
+                    }
+                }
+            }
+        </script>
+    </body>
+
+</html>
